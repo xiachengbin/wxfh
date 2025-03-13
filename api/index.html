@@ -86,6 +86,63 @@
             line-height: 1.5;
         }
 
+        .entry-button {
+            margin: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #000;
+            background-color: #fff;
+            border: 2px solid #000;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .entry-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 1.5rem;
+            z-index: 9999;
+            display: none; /* Initially hidden */
+        }
+
+        .mask .message {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .mask .message button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .mask .message button:hover {
+            background: #000;
+            color: #fff;
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 1.5rem;
@@ -99,6 +156,11 @@
                 font-size: 1.1rem;
                 padding: 1rem;
             }
+
+            .entry-button {
+                font-size: 1rem;
+                padding: 0.3rem 0.7rem;
+            }
         }
     </style>
 </head>
@@ -110,37 +172,61 @@
             </svg>
         </div>
         <div id="tips">
-            <h2>正在跳转...</h2>
+            <h2>请选择入口</h2>
+            <button class="entry-button" onclick="navigateToPage()">入口1</button>
+            <button class="entry-button" onclick="navigateToPage()">入口2</button>
+            <button class="entry-button" onclick="navigateToPage()">入口3</button>
+            <button class="entry-button" onclick="navigateToPage()">入口4</button>
+            <button class="entry-button" onclick="navigateToPage()">入口5</button>
+            <button class="entry-button" onclick="navigateToPage()">入口6</button>
+        </div>
+    </div>
+
+    <div class="mask" id="mask">
+        <div class="message">
             <p>请稍候，正在为您跳转到目标网站。</p>
+            <button onclick="externalRedirect()">跳转浏览器</button>
         </div>
     </div>
 
     <script>
-    var url = document.location.toString();
-    var urlParmStr = url.slice(url.indexOf('=') + 1);
-    var ua = navigator.userAgent.toLowerCase();
-    var isQQ = ua.indexOf('qq') != -1;
-    var isWeixin = ua.indexOf('micromessenger') != -1;
+    function navigateToPage() {
+        var url = document.location.toString();
+        var urlParmStr = url.slice(url.indexOf('=') + 1);
+        var ua = navigator.userAgent.toLowerCase();
+        var isQQ = ua.indexOf('qq') != -1;
+        var isWeixin = ua.indexOf('micromessenger') != -1;
 
-    var notice_openBrowser = `
-        <h2>请在浏览器中打开</h2>
-        <p>当前页面无法在当前环境中查看</p>
-        <p>点击右上角三个点，然后选择在浏览器中打开</p>
-        <p>或复制下方链接到浏览器打开：</p>
-        <div class="url-display">
-            ${decodeURIComponent(urlParmStr)}
-        </div>
-    `;
+        var notice_openBrowser = `
+            <h2>请在浏览器中打开</h2>
+            <p>当前页面无法在当前环境中查看</p>
+            <p>点击右上角三个点，然后选择在浏览器中打开</p>
+            <p>或复制下方链接到浏览器打开：</p>
+            <div class="url-display">
+                ${decodeURIComponent(urlParmStr)}
+            </div>
+        `;
 
-    if (isWeixin || isQQ) {
-        document.getElementById("tips").innerHTML = notice_openBrowser;
-    } else {
+        if (isWeixin || isQQ) {
+            document.getElementById("tips").innerHTML = notice_openBrowser;
+        } else {
+            if (urlParmStr === url) {
+                urlParmStr = "https://888haoka.us.kg"; // 设置默认目标网站 URL
+            }
+            document.getElementById('mask').style.display = 'flex';
+            setTimeout(function() {
+                location.href = decodeURIComponent(urlParmStr); // 等待后自动跳转
+            }, 500); // 5毫秒延时，展示“正在跳转”提示
+        }
+    }
+
+    function externalRedirect() {
+        var url = document.location.toString();
+        var urlParmStr = url.slice(url.indexOf('=') + 1);
         if (urlParmStr === url) {
             urlParmStr = "https://888haoka.us.kg"; // 设置默认目标网站 URL
         }
-        setTimeout(function() {
-            location.href = decodeURIComponent(urlParmStr); // 等待后自动跳转
-        }, 500); // 5毫秒延时，展示“正在跳转”提示
+        window.open(decodeURIComponent(urlParmStr), '_blank');
     }
     </script>
 </body>
