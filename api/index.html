@@ -79,6 +79,11 @@
             transform: scale(1.05);
         }
 
+        .url-display a {
+            color: #000;
+            text-decoration: none;
+        }
+
         p {
             margin: 0.3rem 0;
             font-size: 1.1rem; /* 增大字体 */
@@ -128,7 +133,7 @@
         <p>点击右上角三个点，然后选择在浏览器中打开</p>
         <p>或复制下方链接到浏览器打开：</p>
         <div class="url-display">
-              <a href="${decodeURIComponent(urlParmStr)}" target="_blank"></a>
+            <a href="${decodeURIComponent(urlParmStr)}" target="_blank">${decodeURIComponent(urlParmStr)}</a>
         </div>
     `;
 
