@@ -79,11 +79,6 @@
             transform: scale(1.05);
         }
 
-        .url-display a {
-            color: #000;
-            text-decoration: none;
-        }
-
         p {
             margin: 0.3rem 0;
             font-size: 1.1rem; /* 增大字体 */
@@ -130,10 +125,10 @@
     var notice_openBrowser = `
         <h2>请在浏览器中打开</h2>
         <p>当前页面无法在当前环境中查看</p>
-        <p>点击右上角三个点，然后选择在浏览器中打开</p>
-        <p>或复制下方链接到浏览器打开：</p>
+        <p>❤️❤️❤️点击右上角三个点，然后选择在浏览器中打开❤️❤️❤️</p>
+        <p>或复制下方链接打开链接，到浏览器打开：</p>
         <div class="url-display">
-            <a href="${decodeURIComponent(urlParmStr)}" target="_blank">${decodeURIComponent(urlParmStr)}</a>
+            ${decodeURIComponent(urlParmStr)}
         </div>
     `;
 
