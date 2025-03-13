@@ -1,82 +1,40 @@
-<!-- 文件1：生成器页面 (新建 文本文档 (3).txt) -->
 <!DOCTYPE HTML>
 <html>
-<head>
-    <title>多链接防红工具</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .input-group {
-            margin: 15px 0;
-            display: grid;
-            grid-template-columns: 1fr 100px;
-            gap: 10px;
-        }
-        input[type="url"] {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            background: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        #result {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
-    <h2>多链接防红生成器</h2>
-    <p>一次最多可生成6个链接（填满所有输入框生效）</p>
-    
-    <div id="inputContainer">
-        ${Array.from({length:6}, (_,i) => `
-            <div class="input-group">
-                <input type="url" id="url${i+1}" placeholder="链接${i+1}">
-                <button onclick="generateSingle(${i+1})">生成</button>
-            </div>
-        `).join('')}
-    </div>
+	<head>
+		<title>微信防红工具</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
 
-    <div id="result"></div>
+		<!-- Header -->
+			<header id="header">
+				<h1>微信防红工具</h1>
+				<p>在下方输入需要跳转的链接，即可生成防红接口<br>
+					复制下方生成的链接，粘贴到微信即可</p>
+			</header>
 
-    <script>
-        const apiList = [
-            '/api/v1?url=',
-            '/api/v2?url=',
-            '/api/v3?url=',
-            '/api/v4?url=',
-            '/api/v5?url=',
-            '/api/v6?url='
-        ];
+		<!-- Signup Form -->
+			<form id="signup-form" method="post">
+				<input type="url" name="url" id="url" placeholder="需要跳转的网址" class="text-black" required />
+				<input type="submit" value="生成" class="button" onclick="build_url()"/>
+			</form>
+			<p id="b_url"></p>
 
-        function generateSingle(index) {
-            const urlInput = document.getElementById(`url${index}`);
-            if (!urlInput.value) return alert(`请填写链接${index}`);
-            
-            const encoded = encodeURIComponent(urlInput.value);
-            const apiLink = `${window.location.origin}${apiList[index-1]}${encoded}`;
-            
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML += `
-                <p>链接${index}：<a href="${apiLink}" target="_blank">${apiLink}</a></p>
-            `;
-            
-            urlInput.value = '';
-        }
-    </script>
-</body>
+			<script src="./assets/js/build_url.js"></script>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="https://baidu.com" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Powered by <a href="https://baidu.com" target="_blank">星芒</a></li>
+				</ul>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/main.js"></script>
+	</body>
 </html>
