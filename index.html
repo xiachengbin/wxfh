@@ -1,40 +1,75 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>微信防红工具</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<head>
+    <title>微信防红工具</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
 
-		<!-- Header -->
-			<header id="header">
-				<h1>微信防红工具</h1>
-				<p>在下方输入需要跳转的链接，即可生成防红接口<br>
-					复制下方生成的链接，粘贴到微信即可</p>
-			</header>
+    <!-- Landing Page -->
+    <div id="landing-page">
+        <h1>选择您的操作</h1>
+        <a href="#" onclick="openPage('page1');return false;" class="button">链接入口 1</a>
+        <a href="#" onclick="openPage('page2');return false;" class="button">链接入口 2</a>
+    </div>
 
-		<!-- Signup Form -->
-			<form id="signup-form" method="post">
-				<input type="url" name="url" id="url" placeholder="需要跳转的网址" class="text-black" required />
-				<input type="submit" value="生成" class="button" onclick="build_url()"/>
-			</form>
-			<p id="b_url"></p>
+    <!-- Page 1 -->
+    <div id="page1" style="display:none;">
+        <!-- Header -->
+        <header id="header">
+            <h1>微信防红工具</h1>
+            <p>在下方输入需要跳转的链接，即可生成防红接口<br>
+                复制下方生成的链接，粘贴到微信即可</p>
+        </header>
 
-			<script src="./assets/js/build_url.js"></script>
+        <!-- Signup Form -->
+        <form id="signup-form" method="post">
+            <input type="url" name="url" id="url" placeholder="需要跳转的网址" class="text-black" required />
+            <input type="submit" value="生成" class="button" onclick="build_url()"/>
+        </form>
+        <p id="b_url"></p>
 
-		<!-- Footer -->
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="https://baidu.com" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; Powered by <a href="https://baidu.com" target="_blank">星芒</a></li>
-				</ul>
-			</footer>
+        <script src="./assets/js/build_url.js"></script>
+    </div>
 
-		<!-- Scripts -->
-			<script src="assets/js/main.js"></script>
-	</body>
+    <!-- Page 2 -->
+    <div id="page2" style="display:none;">
+        <!-- Header -->
+        <header id="header">
+            <h1>微信防红工具</h1>
+            <p>在下方输入需要跳转的链接，即可生成防红接口<br>
+                复制下方生成的链接，粘贴到微信即可</p>
+        </header>
+
+        <!-- Signup Form -->
+        <form id="signup-form" method="post">
+            <input type="url" name="url" id="url" placeholder="需要跳转的网址" class="text-black" required />
+            <input type="submit" value="生成" class="button" onclick="build_url()"/>
+        </form>
+        <p id="b_url"></p>
+
+        <script src="./assets/js/build_url.js"></script>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="icons">
+            <li><a href="https://baidu.com" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+        </ul>
+        <ul class="copyright">
+            <li>&copy; Powered by <a href="https://baidu.com" target="_blank">星芒</a></li>
+        </ul>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        function openPage(pageId) {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById(pageId).style.display = 'block';
+        }
+    </script>
+</body>
 </html>
