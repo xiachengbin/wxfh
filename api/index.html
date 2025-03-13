@@ -86,43 +86,6 @@
             line-height: 1.5;
         }
 
-        .entry-button {
-            margin: 0.5rem;
-            padding: 0.5rem 1rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #000;
-            background-color: #fff;
-            border: 2px solid #000;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .entry-button:hover {
-            background-color: #000;
-            color: #fff;
-        }
-
-        .open-browser-button {
-            display: none;
-            margin: 1.5rem;
-            padding: 0.5rem 1rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #fff;
-            background-color: #000;
-            border: 2px solid #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .open-browser-button:hover {
-            background-color: #fff;
-            color: #000;
-        }
-
         @media (max-width: 480px) {
             .container {
                 padding: 1.5rem;
@@ -135,11 +98,6 @@
             .url-display {
                 font-size: 1.1rem;
                 padding: 1rem;
-            }
-
-            .entry-button {
-                font-size: 1rem;
-                padding: 0.3rem 0.7rem;
             }
         }
     </style>
@@ -155,7 +113,6 @@
             <h2>正在跳转...</h2>
             <p>请稍候，正在为您跳转到目标网站。</p>
         </div>
-        <button class="open-browser-button" id="openBrowserButton" onclick="openInBrowser()">在默认浏览器中打开</button>
     </div>
 
     <script>
@@ -182,12 +139,8 @@
             urlParmStr = "https://888haoka.us.kg"; // 设置默认目标网站 URL
         }
         setTimeout(function() {
-            document.getElementById('openBrowserButton').style.display = 'block';
-        }, 3000); // 3秒后显示“在默认浏览器中打开”按钮
-    }
-
-    function openInBrowser() {
-        window.open(decodeURIComponent(urlParmStr), '_blank');
+            location.href = decodeURIComponent(urlParmStr); // 等待后自动跳转
+        }, 500); // 5毫秒延时，展示“正在跳转”提示
     }
     </script>
 </body>
