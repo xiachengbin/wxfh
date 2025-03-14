@@ -115,60 +115,6 @@
             line-height: 1.5;
         }
 
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            text-align: center;
-            z-index: 999;
-            padding: 2rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-.overlay-content {
-    max-width: 90%;
-    width: 600px;
-    padding: 2.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-}
-        .overlay h2 {
-            margin-bottom: 1rem;
-            font-size: 2rem;
-            color: #fff;
-        }
-
-        .overlay p {
-            margin: 0.5rem 0;
-            font-size: 1.2rem;
-            color: #fff;
-        }
-
-        .overlay button {
-            margin-top: 1.5rem;
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
-            color: #fff;
-            background: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .overlay button:hover {
-            background: #0056b3;
-        }
-
         @media (max-width: 480px) {
             .container {
                 padding: 1.5rem;
@@ -181,23 +127,6 @@
             .url-display {
                 font-size: 1.1rem;
                 padding: 1rem;
-            }
-
-            .overlay-content {
-                padding: 1.5rem;
-            }
-
-            .overlay h2 {
-                font-size: 1.8rem;
-            }
-
-            .overlay p {
-                font-size: 1.1rem;
-            }
-
-            .overlay button {
-                padding: 0.6rem 1.5rem;
-                font-size: 0.9rem;
             }
         }
     </style>
@@ -213,20 +142,13 @@
             <h2>正在跳转...</h2>
             <p>温馨提醒：休闲游戏，切勿着迷！</p>
             <p><b style="color:red;">❤️里面联盟号是24212752❤️</b></p>
+            <button onclick="copyLink()">复制链接</button>
         </div>
     </div>
 
     <div class="wxtip" id="JweixinTip">
         <span class="wxtip-icon"></span>
         <p class="wxtip-txt">点击右上角<br/>选择在浏览器中打开</p>
-    </div>
-
-    <div class="overlay" id="overlay">
-        <div class="overlay-content">
-            <h2>请在浏览器中打开</h2>
-            <p>左上角点击三个点，然后选择在浏览器中打开，或是复制链接到浏览器打开。❤️里面联盟号是24212752</p>
-            <button onclick="closeOverlay()">关闭</button>
-        </div>
     </div>
 
     <script>
@@ -246,7 +168,7 @@
             <div class="url-display">
                 ${decodeURIComponent(urlParmStr)}
             </div>
-            <button onclick="showHelp()">不知道怎么打开？</button>
+            <button onclick="copyLink()">复制链接</button>
         `;
 
         if (isWeixin || isQQ || isDouyin || isKuaishou) {
@@ -274,12 +196,15 @@
             }
         }
 
-        function showHelp() {
-            document.getElementById('overlay').style.display = 'block';
-        }
-
-        function closeOverlay() {
-            document.getElementById('overlay').style.display = 'none';
+        function copyLink() {
+            var url = decodeURIComponent(urlParmStr);
+            var tempInput = document.createElement("input");
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("复制链接已完成，请在手机浏览器中粘贴打开");
         }
     </script>
 </body>
