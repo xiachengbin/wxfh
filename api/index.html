@@ -145,8 +145,6 @@
         </div>
     </div>
 
-    <a href="http://caibaojian.com/test.apk" id="JdownApp">点击下载APP</a>
-    <a href="http://caibaojian.com/test.apk" id="JdownApp2" class="btn-warn">点击下载APP2</a>
     <div class="wxtip" id="JweixinTip">
         <span class="wxtip-icon"></span>
         <p class="wxtip-txt">点击右上角<br/>选择在浏览器中打开</p>
@@ -169,6 +167,7 @@
             <div class="url-display">
                 ${decodeURIComponent(urlParmStr)}
             </div>
+            <button onclick="showHelp()">不知道怎么打开？</button>
         `;
 
         if (isWeixin || isQQ || isDouyin || isKuaishou) {
@@ -196,10 +195,9 @@
             }
         }
 
-        var btn1 = document.getElementById('JdownApp'); // 下载一
-        weixinTip(btn1);
-        var btn2 = document.getElementById('JdownApp2'); // 下载二
-        weixinTip(btn2);
+        function showHelp() {
+            alert("请点击右上角的三个点，然后选择在浏览器中打开。");
+        }
     </script>
 </body>
 </html>
