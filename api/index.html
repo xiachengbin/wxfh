@@ -139,7 +139,14 @@
     if (isWeixin || isQQ || isDouyin || isKuaishou) {
         document.getElementById("tips").innerHTML = notice_openBrowser;
         document.getElementById("openInBrowser").onclick = function() {
-            window.location.href = decodeURIComponent(urlParmStr);
+            var openUrl = decodeURIComponent(urlParmStr);
+            if (/android/i.test(ua)) {
+                window.location = `intent://${openUrl.replace(/^https?:\/\//, '')}#Intent;scheme=http;package=com.android.chrome;end;`;
+            } else if (/iphone|ipad|ipod/i.test(ua)) {
+                window.location = `http://${openUrl}`;
+            } else {
+                window.location.href = openUrl;
+            }
         };
     } else {
         if (urlParmStr === url) {
