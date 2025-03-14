@@ -159,9 +159,14 @@
             </svg>
         </div>
         <div id="tips">
-            <h2>正在跳转...</h2>
-            <p>温馨提醒：休闲游戏，切勿着迷！</p>
-            <p><b style="color:red;">❤️里面联盟号是24212752❤️</b></p>
+            <h2>请在浏览器中打开</h2>
+            <p>当前页面无法在当前环境中查看</p>
+            <p><b style="color:red;">点击右上角三个点，然后选择在浏览器中打开❤️里面联盟号是24212752</b></p>
+            <p>或复制下方链接到浏览器打开：</p>
+            <div class="url-display" id="url-display">
+                <!-- URL will be inserted here -->
+            </div>
+            <button onclick="showHelp()">不知道怎么打开？</button>
         </div>
     </div>
 
@@ -176,7 +181,7 @@
             <p>当前页面无法在当前环境中查看</p>
             <p><b style="color:red;">点击右上角三个点，然后选择在浏览器中打开❤️里面联盟号是24212752</b></p>
             <p>或复制下方链接到浏览器打开：</p>
-            <div class="url-display" id="url-display">
+            <div class="url-display" id="url-display-overlay">
                 <!-- URL will be inserted here -->
             </div>
             <button onclick="closeOverlay()">关闭</button>
