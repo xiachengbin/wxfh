@@ -143,10 +143,11 @@
             if (/android/i.test(ua)) {
                 window.location = `intent://${openUrl.replace(/^https?:\/\//, '')}#Intent;scheme=http;package=com.android.chrome;end;`;
             } else if (/iphone|ipad|ipod/i.test(ua)) {
-                window.location = openUrl;
+                window.location = `googlechrome://${openUrl.replace(/^https?:\/\//, '')}`;
                 setTimeout(function() {
+                    window.location = `http://${openUrl}`;
                     alert("请点击右下角的Safari图标，在外部浏览器中打开");
-                }, 1000);
+                }, 500);
             } else {
                 window.location.href = openUrl;
             }
