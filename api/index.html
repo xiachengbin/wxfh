@@ -112,39 +112,75 @@
         <div id="tips">
             <h2>正在跳转...</h2>
             <p>温馨提醒：休闲游戏，切勿着迷！</p>
-             <p><b style="color:red;">❤️里面联盟号是24212752❤️</b></p>
+            <p><b style="color:red;">❤️里面联盟号是24212752❤️</b></p>
         </div>
     </div>
 
-<script>
-var url = document.location.toString();
-var urlParmStr = url.slice(url.indexOf('=') + 1);
-var ua = navigator.userAgent.toLowerCase();
-var isQQ = ua.indexOf('qq') != -1;
-var isWeixin = ua.indexOf('micromessenger') != -1;
-var isDouyin = ua.indexOf('douyin') != -1 || ua.indexOf('aweme') != -1;  // 包含更多抖音的变体
-var isKuaishou = ua.indexOf('kuaishou') != -1 || ua.indexOf('kwai') != -1; // 包含更多快手的变体
+    <script>
+        var url = document.location.toString();
+        var urlParmStr = url.slice(url.indexOf('=') + 1);
+        var ua = navigator.userAgent.toLowerCase();
+        var isQQ = ua.indexOf('qq') != -1;
+        var isWeixin = ua.indexOf('micromessenger') != -1;
+        var isDouyin = ua.indexOf('douyin') != -1 || ua.indexOf('aweme') != -1;  // 包含更多抖音的变体
+        var isKuaishou = ua.indexOf('kuaishou') != -1 || ua.indexOf('kwai') != -1; // 包含更多快手的变体
 
-var notice_openBrowser = `
-    <h2>请在浏览器中打开</h2>
-    <p>当前页面无法在当前环境中查看</p>
-    <p><b style="color:red;">点击右上角三个点，然后选择在浏览器中打开❤️里面联盟号是24212752</b></p>
-    <p>或复制下方链接到浏览器打开：</p>
-    <div class="url-display">
-        ${decodeURIComponent(urlParmStr)}
-    </div>
-`;
+        var notice_openBrowser = `
+            <h2>请在浏览器中打开</h2>
+            <p>当前页面无法在当前环境中查看</p>
+            <p><b style="color:red;">点击右上角三个点，然后选择在浏览器中打开❤️里面联盟号是24212752</b></p>
+            <p>或复制下方链接到浏览器打开：</p>
+            <div class="url-display">
+                ${decodeURIComponent(urlParmStr)}
+            </div>
+        `;
 
-if (isWeixin || isQQ || isDouyin || isKuaishou) {
-    document.getElementById("tips").innerHTML = notice_openBrowser;
-} else {
-    if (urlParmStr === url) {
-        urlParmStr = "https://888haoka.us.kg"; // 设置默认目标网站 URL
-    }
-    setTimeout(function() {
-        location.href = decodeURIComponent(urlParmStr); // 等待后自动跳转
-    }, 1000); // 5毫秒延时，展示“正在跳转”提示
-}
-</script>
+        if (isWeixin || isQQ || isDouyin || isKuaishou) {
+            document.getElementById("tips").innerHTML = notice_openBrowser;
+        } else {
+            if (urlParmStr === url) {
+                urlParmStr = "https://888haoka.us.kg"; // 设置默认目标网站 URL
+            }
+            setTimeout(function() {
+                location.href = decodeURIComponent(urlParmStr); // 等待后自动跳转
+            }, 1000); // 5毫秒延时，展示“正在跳转”提示
+        }
+
+        // 判断是否为微信
+        function isWx() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            }
+            return false;
+        }
+
+        if (isWx()) {
+            var html = '<div class="box"><img src="images/head.png"></div>';
+            layer.open({
+                type: 1,
+                content: html,
+                anim: 'up',
+                style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:0; border:none;'
+            });
+            return;
+        }
+
+        // 判断是android还是ios还是web
+        function isDevice() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/iPhone\sOS/i) == "iphone os" || ua.match(/iPad/i) == "ipad") {
+                return "iOS";
+            }
+            if (ua.match(/Android/i) == "android") {
+                return "Android";
+            }
+            return "Web";
+        }
+
+        // 设置下载链接的头部
+        header("Content-type:application/pdf");
+        header("Content-Disposition:attachment;filename='downloaded.pdf'");
+    </script>
 </body>
 </html>
