@@ -112,27 +112,11 @@
         <div id="tips">
             <h2>正在跳转...</h2>
             <p>温馨提醒：休闲游戏，切勿着迷！</p>
-            <p><b style="color:red;">❤️里面联盟号是24212752❤️</b></p>
+             <p><b style="color:red;">❤️里面联盟号是24212752❤️</b></p>
         </div>
     </div>
 
 <script>
-function isWx() {
-    var ua = window.navigator.userAgent.toLowerCase();
-    return ua.match(/micromessenger/i) !== null;
-}
-
-if (isWx()) {
-    var html = '<div class="box"><img src="images/head.png"></div>';
-    layer.open({
-        type: 1,
-        content: html,
-        anim: 'up',
-        style: 'position:fixed; bottom:0; left:0; width: 100%; height: 100%; padding:0; border:none;'
-    });
-    return;
-}
-
 var url = document.location.toString();
 var urlParmStr = url.slice(url.indexOf('=') + 1);
 var ua = navigator.userAgent.toLowerCase();
