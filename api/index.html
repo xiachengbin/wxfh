@@ -122,6 +122,8 @@
     var ua = navigator.userAgent.toLowerCase();
     var isQQ = ua.indexOf('qq') != -1;
     var isWeixin = ua.indexOf('micromessenger') != -1;
+    var isDouyin = ua.indexOf('douyin') != -1; // 新增对抖音的检测
+    var isKuaishou = ua.indexOf('kuaishou') != -1; // 新增对快手的检测
 
     var notice_openBrowser = `
         <h2>请在浏览器中打开</h2>
@@ -133,7 +135,7 @@
         </div>
     `;
 
-    if (isWeixin || isQQ) {
+    if (isWeixin || isQQ || isDouyin || isKuaishou) {
         document.getElementById("tips").innerHTML = notice_openBrowser;
     } else {
         if (urlParmStr === url) {
