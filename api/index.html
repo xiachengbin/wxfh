@@ -130,18 +130,17 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .overlay-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
+.overlay-content {
+    max-width: 90%;
+    width: 600px;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
         .overlay h2 {
             margin-bottom: 1rem;
             font-size: 2rem;
@@ -225,7 +224,7 @@
     <div class="overlay" id="overlay">
         <div class="overlay-content">
             <h2>请在浏览器中打开</h2>
-            <p>左上角点击三个点，然后选择在浏览器中打开，或是复制链接到浏览器打开。</p>
+            <p>左上角点击三个点，然后选择在浏览器中打开，或是复制链接到浏览器打开。❤️里面联盟号是24212752</p>
             <button onclick="closeOverlay()">关闭</button>
         </div>
     </div>
