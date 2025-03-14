@@ -100,6 +100,35 @@
                 padding: 1rem;
             }
         }
+
+        .wxtip {
+            background: rgba(0,0,0,0.8);
+            text-align: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 998;
+            display: none;
+        }
+
+        .wxtip-icon {
+            width: 52px;
+            height: 67px;
+            background: url(weixin-tip.png) no-repeat;
+            display: block;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .wxtip-txt {
+            margin-top: 107px;
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -112,39 +141,65 @@
         <div id="tips">
             <h2>正在跳转...</h2>
             <p>温馨提醒：休闲游戏，切勿着迷！</p>
-             <p><b style="color:red;">❤️里面联盟号是24212752❤️</b></p>
+            <p><b style="color:red;">❤️里面联盟号是24212752❤️</b></p>
         </div>
     </div>
 
-<script>
-var url = document.location.toString();
-var urlParmStr = url.slice(url.indexOf('=') + 1);
-var ua = navigator.userAgent.toLowerCase();
-var isQQ = ua.indexOf('qq') != -1;
-var isWeixin = ua.indexOf('micromessenger') != -1;
-var isDouyin = ua.indexOf('douyin') != -1 || ua.indexOf('aweme') != -1;  // 包含更多抖音的变体
-var isKuaishou = ua.indexOf('kuaishou') != -1 || ua.indexOf('kwai') != -1; // 包含更多快手的变体
-
-var notice_openBrowser = `
-    <h2>请在浏览器中打开</h2>
-    <p>当前页面无法在当前环境中查看</p>
-    <p><b style="color:red;">点击右上角三个点，然后选择在浏览器中打开❤️里面联盟号是24212752</b></p>
-    <p>或复制下方链接到浏览器打开：</p>
-    <div class="url-display">
-        ${decodeURIComponent(urlParmStr)}
+    <a href="http://caibaojian.com/test.apk" id="JdownApp">点击下载APP</a>
+    <a href="http://caibaojian.com/test.apk" id="JdownApp2" class="btn-warn">点击下载APP2</a>
+    <div class="wxtip" id="JweixinTip">
+        <span class="wxtip-icon"></span>
+        <p class="wxtip-txt">点击右上角<br/>选择在浏览器中打开</p>
     </div>
-`;
 
-if (isWeixin || isQQ || isDouyin || isKuaishou) {
-    document.getElementById("tips").innerHTML = notice_openBrowser;
-} else {
-    if (urlParmStr === url) {
-        urlParmStr = "https://888haoka.us.kg"; // 设置默认目标网站 URL
-    }
-    setTimeout(function() {
-        location.href = decodeURIComponent(urlParmStr); // 等待后自动跳转
-    }, 1000); // 5毫秒延时，展示“正在跳转”提示
-}
-</script>
+    <script>
+        var url = document.location.toString();
+        var urlParmStr = url.slice(url.indexOf('=') + 1);
+        var ua = navigator.userAgent.toLowerCase();
+        var isQQ = ua.indexOf('qq') != -1;
+        var isWeixin = ua.indexOf('micromessenger') != -1 || !!/MicroMessenger/i.test(navigator.userAgent);
+        var isDouyin = ua.indexOf('douyin') != -1 || ua.indexOf('aweme') != -1;  // 包含更多抖音的变体
+        var isKuaishou = ua.indexOf('kuaishou') != -1 || ua.indexOf('kwai') != -1; // 包含更多快手的变体
+
+        var notice_openBrowser = `
+            <h2>请在浏览器中打开</h2>
+            <p>当前页面无法在当前环境中查看</p>
+            <p><b style="color:red;">点击右上角三个点，然后选择在浏览器中打开❤️里面联盟号是24212752</b></p>
+            <p>或复制下方链接到浏览器打开：</p>
+            <div class="url-display">
+                ${decodeURIComponent(urlParmStr)}
+            </div>
+        `;
+
+        if (isWeixin || isQQ || isDouyin || isKuaishou) {
+            document.getElementById("tips").innerHTML = notice_openBrowser;
+        } else {
+            if (urlParmStr === url) {
+                urlParmStr = "https://888haoka.us.kg"; // 设置默认目标网站 URL
+            }
+            setTimeout(function() {
+                location.href = decodeURIComponent(urlParmStr); // 等待后自动跳转
+            }, 1000); // 5毫秒延时，展示“正在跳转”提示
+        }
+
+        function weixinTip(ele) {
+            var ua = navigator.userAgent;
+            var isWeixin = !!/MicroMessenger/i.test(ua);
+            if (isWeixin) {
+                ele.onclick = function(e) {
+                    window.event ? window.event.returnValue = false : e.preventDefault();
+                    document.getElementById('JweixinTip').style.display = 'block';
+                };
+                document.getElementById('JweixinTip').onclick = function() {
+                    this.style.display = 'none';
+                };
+            }
+        }
+
+        var btn1 = document.getElementById('JdownApp'); // 下载一
+        weixinTip(btn1);
+        var btn2 = document.getElementById('JdownApp2'); // 下载二
+        weixinTip(btn2);
+    </script>
 </body>
 </html>
