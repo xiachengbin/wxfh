@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
     <title>推荐使用浏览器打开</title>
     <style>
-        /* 动态渐变背景动画 */
         @keyframes Gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -23,7 +22,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #000; /* 字体颜色改为黑色 */
+            color: #000;
         }
 
         .container {
@@ -52,12 +51,12 @@
         .logo svg {
             width: 45px;
             height: 45px;
-            fill: #000; /* 符号颜色改为黑色 */
+            fill: #000;
         }
 
         h2 {
             margin: 0 0 1rem;
-            font-size: 2rem; /* 字体更大 */
+            font-size: 2rem;
             font-weight: 600;
             color: #000;
         }
@@ -68,8 +67,8 @@
             border-radius: 10px;
             margin: 1.2rem 0;
             word-break: break-all;
-            font-size: 1.2rem; /* 增大字体 */
-            color: #000; /* 链接文本颜色改为黑色 */
+            font-size: 1.2rem;
+            color: #000;
             font-weight: 500;
             box-shadow: inset 0 1px 5px rgba(255, 255, 255, 0.3);
             transition: transform 0.3s ease;
@@ -81,9 +80,95 @@
 
         p {
             margin: 0.3rem 0;
-            font-size: 1.1rem; /* 增大字体 */
+            font-size: 1.1rem;
             color: #000;
             line-height: 1.5;
+        }
+
+        .wxtip {
+            background: rgba(0,0,0,0.8);
+            text-align: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 998;
+            display: none;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            padding: 2rem;
+        }
+
+        .wxtip-icon {
+            width: 52px;
+            height: 67px;
+            background: url(weixin-tip.png) no-repeat;
+            display: block;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .wxtip-txt {
+            margin-top: 107px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            z-index: 999;
+            padding: 2rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .overlay-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .overlay h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .overlay p {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .overlay button {
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            color: #fff;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .overlay button:hover {
+            background: #0056b3;
         }
 
         @media (max-width: 480px) {
@@ -99,55 +184,23 @@
                 font-size: 1.1rem;
                 padding: 1rem;
             }
-        }
 
-        .wxtip {
-            background: rgba(0,0,0,0.8);
-            text-align: center;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 998;
-            display: none;
-        }
+            .overlay-content {
+                padding: 1.5rem;
+            }
 
-        .wxtip-icon {
-            width: 52px;
-            height: 67px;
-            background: url(weixin-tip.png) no-repeat;
-            display: block;
-            position: absolute;
-            right: 20px;
-            top: 20px;
-        }
+            .overlay h2 {
+                font-size: 1.8rem;
+            }
 
-        .wxtip-txt {
-            margin-top: 107px;
-            color: #fff;
-            font-size: 16px;
-            line-height: 1.5;
-        }
+            .overlay p {
+                font-size: 1.1rem;
+            }
 
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            text-align: center;
-            z-index: 999;
-        }
-
-        .overlay-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            .overlay button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -172,6 +225,7 @@
 
     <div class="overlay" id="overlay">
         <div class="overlay-content">
+            <h2>请在浏览器中打开</h2>
             <p>左上角点击三个点，然后选择在浏览器中打开，或是复制链接到浏览器打开。</p>
             <button onclick="closeOverlay()">关闭</button>
         </div>
@@ -183,8 +237,8 @@
         var ua = navigator.userAgent.toLowerCase();
         var isQQ = ua.indexOf('qq') != -1;
         var isWeixin = ua.indexOf('micromessenger') != -1 || !!/MicroMessenger/i.test(navigator.userAgent);
-        var isDouyin = ua.indexOf('douyin') != -1 || ua.indexOf('aweme') != -1;  // 包含更多抖音的变体
-        var isKuaishou = ua.indexOf('kuaishou') != -1 || ua.indexOf('kwai') != -1; // 包含更多快手的变体
+        var isDouyin = ua.indexOf('douyin') != -1 || ua.indexOf('aweme') != -1;
+        var isKuaishou = ua.indexOf('kuaishou') != -1 || ua.indexOf('kwai') != -1;
 
         var notice_openBrowser = `
             <h2>请在浏览器中打开</h2>
@@ -201,11 +255,11 @@
             document.getElementById("tips").innerHTML = notice_openBrowser;
         } else {
             if (urlParmStr === url) {
-                urlParmStr = "https://888haoka.us.kg"; // 设置默认目标网站 URL
+                urlParmStr = "https://888haoka.us.kg";
             }
             setTimeout(function() {
-                location.href = decodeURIComponent(urlParmStr); // 等待后自动跳转
-            }, 1000); // 1秒延时，展示“正在跳转”提示
+                location.href = decodeURIComponent(urlParmStr);
+            }, 1000);
         }
 
         function weixinTip(ele) {
