@@ -110,6 +110,13 @@
             border-radius: 8px;
         }
 
+        /* 新增父容器样式 */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* 按钮之间的间距 */
+        }
+
         /* 响应式设计 */
         @media (max-width: 480px) {
             .main-container {
@@ -168,14 +175,22 @@
             <div class="link-box">
                 ${decodeURIComponent(urlParmStr)}
             </div>
-            <button class="action-button" onclick="copyLink()">
-                <svg style="width:20px;fill:white" viewBox="0 0 24 24">
-                    <path d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
-                </svg>
-                复制链接
-            </button>
+            <div class="button-container">
+                <button class="action-button" onclick="copyLink()">
+                    <svg style="width:20px;fill:white" viewBox="0 0 24 24">
+                        <path d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
+                    </svg>
+                    复制链接
+                </button>
+                <button class="action-button" onclick="openBaidu()">
+                    1毛1分
+                </button>
+            </div>
             <p class="alert-text" style="margin-top:1.5rem;">
                 娱乐项目：扎金花、红中、妞妞、三公、比跑快、德州等
+            </p>
+            <p class="alert-text" style="margin-top:1.5rem;">
+                注意事项：本页面下载的是1快1分，要1毛1分的点击文字上方的1毛1分下载
             </p>
         `;
 
@@ -205,6 +220,11 @@
                 document.body.removeChild(tempInput);
                 alert("复制成功，请到浏览器粘贴访问");
             });
+        }
+
+        // 打开百度功能
+        function openBaidu() {
+            window.open("https://xiahuangs.github.io/fh/api", "_blank");
         }
     </script>
 </body>
