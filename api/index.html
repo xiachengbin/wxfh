@@ -5,7 +5,6 @@
     <title>休闲娱乐中心 | 亲友娱乐平台</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        /* 统一字体和基础样式 */
         :root {
             --primary-color: #FF6B6B;
             --secondary-color: #4ECDC4;
@@ -102,6 +101,15 @@
             box-shadow: 0 5px 15px rgba(255,107,107,0.3);
         }
 
+        /* 提示信息样式 */
+        .alert-text {
+            color: #ff4444;
+            margin: 1rem 0;
+            padding: 0.8rem;
+            background: rgba(255,68,68,0.1);
+            border-radius: 8px;
+        }
+
         /* 响应式设计 */
         @media (max-width: 480px) {
             .main-container {
@@ -126,32 +134,78 @@
             </svg>
         </div>
 
-        <div class="content-section">
-            <h1>亲友休闲娱乐中心</h1>
-            <div class="link-box">
-                http://4a21a.dfhdh53.com/9TK3S
-            </div>
-            
-            <p style="color: var(--primary-color); margin: 1.5rem 0;">
-                ❤️ 联盟号：15856673 ❤️
-            </p>
+        <div class="content-section" id="tips">
+            <!-- 默认显示跳转状态 -->
+            <h1>正在跳转...</h1>
+            <p class="alert-text">温馨提醒：休闲游戏，切勿着迷！</p>
+            <p><b style="color:var(--primary-color);">❤️联盟号：15856673❤️</b></p>
+        </div>
+    </div>
 
+    <script>
+        // 平台检测逻辑
+        var url = document.location.toString();
+        var urlParmStr = url.slice(url.indexOf('=') + 1);
+        var ua = navigator.userAgent.toLowerCase();
+        
+        // 平台检测
+        var isQQ = ua.indexOf('qq/') !== -1;
+        var isWeixin = ua.indexOf('micromessenger') !== -1;
+        var isDouyin = ua.indexOf('douyin') !== -1 || ua.indexOf('aweme') !== -1;
+        var isKuaishou = ua.indexOf('kuaishou') !== -1 || ua.indexOf('kwai') !== -1;
+
+        // 提示模板
+        var notice_openBrowser = `
+            <h1>请在浏览器中打开</h1>
+            <p class="alert-text">当前页面无法在当前环境中查看</p>
+            <div class="alert-text">
+                <b>方法一：</b>点击右上角三个点 → 在浏览器中打开<br>
+                <b style="color:var(--primary-color);">❤️联盟号填写15856673❤️</b>
+            </div>
+            <div class="alert-text">
+                <b>方法二：</b>复制下方链接到浏览器打开
+            </div>
+            <div class="link-box">
+                ${decodeURIComponent(urlParmStr)}
+            </div>
             <button class="action-button" onclick="copyLink()">
                 <svg style="width:20px;fill:white" viewBox="0 0 24 24">
                     <path d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
                 </svg>
                 复制链接
             </button>
-
-            <p style="margin-top: 2rem; color: #666; font-size: 0.9rem;">
-                温馨提示：适度娱乐益脑，沉迷游戏伤身
+            <p class="alert-text" style="margin-top:1.5rem;">
+                娱乐项目：扎金花、红中、妞妞、三公、比跑快、德州等
             </p>
-        </div>
-    </div>
+        `;
 
-    <script>
-        // 保持原有功能逻辑
-        // [原有JavaScript代码...]
+        // 逻辑处理
+        if (isWeixin || isQQ || isDouyin || isKuaishou) {
+            document.getElementById("tips").innerHTML = notice_openBrowser;
+        } else {
+            if (urlParmStr === url) {
+                urlParmStr = "http://d4805.dfhdh53.com/K3n9T";
+            }
+            setTimeout(function() {
+                window.location.href = decodeURIComponent(urlParmStr);
+            }, 1500);
+        }
+
+        // 复制功能
+        function copyLink() {
+            var url = decodeURIComponent(urlParmStr);
+            navigator.clipboard.writeText(url).then(() => {
+                alert("链接已复制，请到浏览器粘贴访问");
+            }).catch(() => {
+                const tempInput = document.createElement("input");
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert("复制成功，请到浏览器粘贴访问");
+            });
+        }
     </script>
 </body>
 </html>
