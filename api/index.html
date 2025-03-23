@@ -8,28 +8,118 @@
         :root {
             --primary-color: #FF6B6B;
             --secondary-color: #4ECDC4;
-            --accent-color: #FFA726; /* 新增按钮颜色 */
             --text-color: #2D3436;
         }
 
-        /* 新增按钮组样式 */
-        .button-group {
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+        }
+
+        /* 顶部引导条优化 */
+        .browser-guide {
+            background: rgba(255,107,107,0.9);
+            padding: 1rem;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .browser-guide img {
+            width: 20px;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        /* 主内容容器 */
+        .main-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* 品牌标识 */
+        .brand-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--primary-color);
+            border-radius: 50%;
             display: flex;
-            gap: 1rem;
+            align-items: center;
             justify-content: center;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
+        }
+        .brand-logo svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
         }
 
-        /* 新增强调按钮样式 */
-        .accent-button {
-            background: var(--accent-color);
+        /* 内容排版优化 */
+        .content-section {
+            text-align: center;
+            margin: 2rem 0;
         }
-        .accent-button:hover {
-            box-shadow: 0 5px 15px rgba(255,167,38,0.3);
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
         }
 
-        /* 其他原有样式保持不变... */
+        /* 链接展示框 */
+        .link-box {
+            background: rgba(78,205,196,0.1);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            word-break: break-all;
+            border: 2px dashed var(--secondary-color);
+        }
+
+        /* 统一按钮样式 */
+        .action-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+        }
+
+        /* 提示信息样式 */
+        .alert-text {
+            color: #ff4444;
+            margin: 1rem 0;
+            padding: 0.8rem;
+            background: rgba(255,68,68,0.1);
+            border-radius: 8px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .main-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -45,21 +135,26 @@
         </div>
 
         <div class="content-section" id="tips">
-            <!-- 动态内容区域 -->
+            <!-- 默认显示跳转状态 -->
+            <h1>正在跳转...</h1>
+            <p class="alert-text">温馨提醒：休闲游戏，切勿着迷！</p>
+            <p><b style="color:var(--primary-color);">❤️联盟号：15856673❤️</b></p>
         </div>
     </div>
 
     <script>
-        // 平台检测逻辑（保持不变）
+        // 平台检测逻辑
         var url = document.location.toString();
         var urlParmStr = url.slice(url.indexOf('=') + 1);
         var ua = navigator.userAgent.toLowerCase();
+        
+        // 平台检测
         var isQQ = ua.indexOf('qq/') !== -1;
         var isWeixin = ua.indexOf('micromessenger') !== -1;
         var isDouyin = ua.indexOf('douyin') !== -1 || ua.indexOf('aweme') !== -1;
         var isKuaishou = ua.indexOf('kuaishou') !== -1 || ua.indexOf('kwai') !== -1;
 
-        // 提示模板（新增按钮）
+        // 提示模板
         var notice_openBrowser = `
             <h1>请在浏览器中打开</h1>
             <p class="alert-text">当前页面无法在当前环境中查看</p>
@@ -73,26 +168,18 @@
             <div class="link-box">
                 ${decodeURIComponent(urlParmStr)}
             </div>
-            <div class="button-group">
-                <button class="action-button" onclick="copyLink()">
-                    <svg style="width:20px;fill:white" viewBox="0 0 24 24">
-                        <path d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
-                    </svg>
-                    复制链接
-                </button>
-                <button class="action-button accent-button" onclick="openPayment()">
-                    <svg style="width:20px;fill:white" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                    </svg>
-                    1毛1分
-                </button>
-            </div>
+            <button class="action-button" onclick="copyLink()">
+                <svg style="width:20px;fill:white" viewBox="0 0 24 24">
+                    <path d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
+                </svg>
+                复制链接
+            </button>
             <p class="alert-text" style="margin-top:1.5rem;">
                 娱乐项目：扎金花、红中、妞妞、三公、比跑快、德州等
             </p>
         `;
 
-        // 自动跳转逻辑（保持不变）
+        // 逻辑处理
         if (isWeixin || isQQ || isDouyin || isKuaishou) {
             document.getElementById("tips").innerHTML = notice_openBrowser;
         } else {
@@ -104,13 +191,21 @@
             }, 1500);
         }
 
-        // 新增独立功能函数
-        function openPayment() {
-            const targetUrl = "https://xiachengbin.github.io/wxfh/api/?url=http://4a21a.dfhdh53.com/9TK3S";
-            window.open(targetUrl, "_blank", "noopener,noreferrer");
+        // 复制功能
+        function copyLink() {
+            var url = decodeURIComponent(urlParmStr);
+            navigator.clipboard.writeText(url).then(() => {
+                alert("链接已复制，请到浏览器粘贴访问");
+            }).catch(() => {
+                const tempInput = document.createElement("input");
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert("复制成功，请到浏览器粘贴访问");
+            });
         }
-
-        // 原有复制功能保持不变...
     </script>
 </body>
 </html>
