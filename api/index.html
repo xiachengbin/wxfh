@@ -174,6 +174,9 @@
                 </svg>
                 复制链接
             </button>
+            <button class="action-button" onclick="openBaidu()">
+                1毛1分
+            </button>
             <p class="alert-text" style="margin-top:1.5rem;">
                 娱乐项目：扎金花、红中、妞妞、三公、比跑快、德州等
             </p>
@@ -205,6 +208,11 @@
                 document.body.removeChild(tempInput);
                 alert("复制成功，请到浏览器粘贴访问");
             });
+        }
+
+        // 打开百度功能
+        function openBaidu() {
+            window.open("https://www.baidu.com", "_blank");
         }
     </script>
 </body>
