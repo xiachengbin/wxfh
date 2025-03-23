@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>休闲娱乐中心 | 亲友娱乐平台</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 在style部分添加以下内容 -->
     <style>
+        /* 新增颜色变量和按钮组样式 */
         :root {
             --primary-color: #FF6B6B;
             --secondary-color: #4ECDC4;
-            --accent-color: #FFA726; /* 新增强调色 */
+            --accent-color: #FFA726; /* 新按钮颜色 */
             --text-color: #2D3436;
         }
 
-        /* 新增按钮组样式 */
         .button-group {
             display: flex;
             gap: 1rem;
@@ -21,7 +19,6 @@
             flex-wrap: wrap;
         }
 
-        /* 新增强调按钮样式 */
         .accent-button {
             background: var(--accent-color);
         }
@@ -31,10 +28,10 @@
     </style>
 </head>
 <body>
-    <!-- 保持其他结构不变 -->
+    <!-- 原有body内容保持不变 -->
 
     <script>
-        // 修改后的提示模板
+        // 修改提示模板
         var notice_openBrowser = `
             <h1>请在浏览器中打开</h1>
             <p class="alert-text">当前页面无法在当前环境中查看</p>
@@ -55,7 +52,7 @@
                     </svg>
                     复制链接
                 </button>
-                <button class="action-button accent-button" onclick="openPayment()">
+                <button class="action-button accent-button" onclick="openBaidu()">
                     <svg style="width:20px;fill:white" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
                     </svg>
@@ -67,10 +64,9 @@
             </p>
         `;
 
-        // 新增独立打开函数
-        function openPayment() {
-            const targetUrl = "https://xiachengbin.github.io/wxfh/api/?url=http://4a21a.dfhdh53.com/9TK3S";
-            window.open(targetUrl, "_blank", "noopener,noreferrer");
+        // 新增功能函数
+        function openBaidu() {
+            window.open("https://www.baidu.com", "_blank", "noopener,noreferrer");
         }
     </script>
 </body>
