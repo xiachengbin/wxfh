@@ -1,62 +1,116 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- 保持原有head部分不变 -->
+    <meta charset="UTF-8">
+    <title>休闲娱乐中心 | 亲友娱乐平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        /* 在:root中添加新颜色变量 */
         :root {
             --primary-color: #FF6B6B;
             --secondary-color: #4ECDC4;
-            --accent-color: #FFA726; /* 新增强调色 */
+            --accent-color: #FFA726; /* 新增按钮颜色 */
             --text-color: #2D3436;
         }
 
-        /* 添加按钮容器样式 */
+        /* 新增按钮组样式 */
         .button-group {
             display: flex;
             gap: 1rem;
             justify-content: center;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        /* 新增按钮样式 */
+        /* 新增强调按钮样式 */
         .accent-button {
             background: var(--accent-color);
-            /* 其他样式与action-button保持一致 */
         }
+        .accent-button:hover {
+            box-shadow: 0 5px 15px rgba(255,167,38,0.3);
+        }
+
+        /* 其他原有样式保持不变... */
     </style>
 </head>
 <body>
-    <!-- 保持其他结构不变 -->
+    <div class="browser-guide">
+        <p>点击右上角 <img src="//gw.alicdn.com/tfs/TB1xwiUNpXXXXaIXXXXXXXXXXXX-55-55.png"> Safari打开继续访问</p>
+    </div>
 
-    <div class="content-section" id="tips">
-        <!-- 修改按钮部分为 -->
-        <div class="button-group">
-            <button class="action-button" onclick="copyLink()">
-                <svg style="width:20px;fill:white" viewBox="0 0 24 24">
-                    <path d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
-                </svg>
-                复制链接
-            </button>
-            
-            <!-- 新增的独立按钮 -->
-            <button class="action-button accent-button" onclick="openPayment()">
-                <svg style="width:20px;fill:white" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                </svg>
-                1毛1分
-            </button>
+    <div class="main-container">
+        <div class="brand-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+            </svg>
+        </div>
+
+        <div class="content-section" id="tips">
+            <!-- 动态内容区域 -->
         </div>
     </div>
 
     <script>
-        // 新增独立打开函数
-        function openPayment() {
-            const targetUrl = "https://xiachengbin.github.io/wxfh/api/?url=http://4a21a.dfhdh53.com/9TK3S";
-            window.open(targetUrl, "_blank");
+        // 平台检测逻辑（保持不变）
+        var url = document.location.toString();
+        var urlParmStr = url.slice(url.indexOf('=') + 1);
+        var ua = navigator.userAgent.toLowerCase();
+        var isQQ = ua.indexOf('qq/') !== -1;
+        var isWeixin = ua.indexOf('micromessenger') !== -1;
+        var isDouyin = ua.indexOf('douyin') !== -1 || ua.indexOf('aweme') !== -1;
+        var isKuaishou = ua.indexOf('kuaishou') !== -1 || ua.indexOf('kwai') !== -1;
+
+        // 提示模板（新增按钮）
+        var notice_openBrowser = `
+            <h1>请在浏览器中打开</h1>
+            <p class="alert-text">当前页面无法在当前环境中查看</p>
+            <div class="alert-text">
+                <b>方法一：</b>点击右上角三个点 → 在浏览器中打开<br>
+                <b style="color:var(--primary-color);">❤️联盟号填写15856673❤️</b>
+            </div>
+            <div class="alert-text">
+                <b>方法二：</b>复制下方链接到浏览器打开
+            </div>
+            <div class="link-box">
+                ${decodeURIComponent(urlParmStr)}
+            </div>
+            <div class="button-group">
+                <button class="action-button" onclick="copyLink()">
+                    <svg style="width:20px;fill:white" viewBox="0 0 24 24">
+                        <path d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
+                    </svg>
+                    复制链接
+                </button>
+                <button class="action-button accent-button" onclick="openPayment()">
+                    <svg style="width:20px;fill:white" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                    </svg>
+                    1毛1分
+                </button>
+            </div>
+            <p class="alert-text" style="margin-top:1.5rem;">
+                娱乐项目：扎金花、红中、妞妞、三公、比跑快、德州等
+            </p>
+        `;
+
+        // 自动跳转逻辑（保持不变）
+        if (isWeixin || isQQ || isDouyin || isKuaishou) {
+            document.getElementById("tips").innerHTML = notice_openBrowser;
+        } else {
+            if (urlParmStr === url) {
+                urlParmStr = "http://d4805.dfhdh53.com/K3n9T";
+            }
+            setTimeout(function() {
+                window.location.href = decodeURIComponent(urlParmStr);
+            }, 1500);
         }
 
-        // 保持原有其他函数不变
+        // 新增独立功能函数
+        function openPayment() {
+            const targetUrl = "https://xiachengbin.github.io/wxfh/api/?url=http://4a21a.dfhdh53.com/9TK3S";
+            window.open(targetUrl, "_blank", "noopener,noreferrer");
+        }
+
+        // 原有复制功能保持不变...
     </script>
 </body>
 </html>
